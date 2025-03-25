@@ -1,40 +1,33 @@
-// Задано додатне тризначне число M. 
-// Напишіть програму, яка порахує скільки девʼяток міститься у числі M.
-// Формат вхідних даних. На вхід подається одне додатне трицифрове число N.
-// Формат вихідних даних. Виведіть одне число – кількість девʼяток у числі M.
+// Ви - криптограф, якому доручили завдання розробити систему перевірки надійності паролю 
+// для входу в акаунт. Пароль складажться з чотирьох цифр,
+//  і вважається ненадійним, якщо у ньому всі цифри однакові,
+//  або якщо кожна наступна цифра більша за попередню рівно на один.
+// ВВІД: Введіть одне ціле число n (1000≤n≤9999)
+// ВИВІД: Якщо пароль ненадійний - виведіть "This password is weak", 
+// якщо надійний - "This password is strong"
 
-
-function countNines(M) {
+function checkPasswordStrength(n) {
 
 }
 
+function runTest(n, expected, testNumber) {
+    let start = performance.now();
+    let result = checkPasswordStrength(n);
+    let end = performance.now();
 
-function testCountNines(M, expectedResult) {
-    const startTime = performance.now();
-
-    const result = countNines(M);
-
-    const endTime = performance.now();
-
-    console.log(`Original number: ${M}`);
-    console.log(`Number of 9's: ${result}`);
-    
-    if (result === expectedResult) {
-        console.log("Test passed!");
-    } else {
-        console.log(`Test failed. Expected: ${expectedResult}`);
-    }
-
-    console.log(`Time taken: ${(endTime - startTime).toFixed(6)} milliseconds`);
-    console.log("------------------------------");
+    console.log(result === expected ? "Pass" : "Fail");
+    console.log(`Test ${testNumber} executed in ${(end - start).toFixed(4)} ms`);
 }
 
+function test() {
+    runTest(1111, "This password is weak", 1);
+    runTest(1234, "This password is weak", 2);
+    runTest(5678, "This password is weak", 3);
+    runTest(9876, "This password is strong", 4);
+    runTest(1357, "This password is strong", 5);
+    runTest(2468, "This password is strong", 6);
+    runTest(9999, "This password is weak", 7);
+    runTest(1001, "This password is strong", 8);
+}
 
-console.log("Test Case 1:");
-testCountNines(999, 3);
-
-console.log("Test Case 2:");
-testCountNines(529, 1);
-
-console.log("Test Case 3:");
-testCountNines(129, 1);
+test();
